@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+.bgCyan{background-color:cyan}
+.bgPink{background-color:pink}
+.bgWhite{background-color:white}
+.border{border:3px solid red}
+</style>
+<script>
+function changeColor(color){
+	var c=document.getElementById("container");
+	c.setAttribute("class",color);
+}
+function toUpperCase(e){
+	e.value=e.value.toUpperCase();
+}
+function addBorder(e){
+	e.setAttribute("class","border");
+}
+function removeBorder(e){
+	e.remeveAttribute("class");
+}
+</script>
+</head>
+<body onload="alert('웹페이지 로딩됨');">
+<div id="container">
+<input type="radio" name="color" onclick="changeColor('bgCyan');">하늘색
+<input type="radio" name="color" onclick="changeColor('bgPink');">분홍색
+<input type="radio" name="color" onclick="changeColor('bgWhite');">원래대로
+<br>
+<input type="text" id="word" onchange="toUpperCase(this);">
+<div id="box" onmouseover="addBorder(this);" onmouseout="removeBorder(this);">
+mouse
+</div>
+</div>
+</body>
+</html>
