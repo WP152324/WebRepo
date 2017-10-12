@@ -50,8 +50,7 @@ public class UserVO {
    public String getName() {
       return name;
    }
-   public void setName(String string) {
+   public void setName(String name) {
       this.name = name;
-      
    }
 }
