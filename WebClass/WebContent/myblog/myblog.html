@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script>
+	function menu_over(e) {
+		e.setAttribute("class", "nav-item active");
+	}
+	function menu_out(e) {
+		e.setAttribute("class", "nav-item");
+	}
+</script>
+<style>
+.container {
+	padding-top: 30px;
+}
+</style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="myblog.html">TG블로그</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item" onmouseover="menu_over(this);" onmouseout="menu_out(this);">
+			<a class="nav-link" href="profile.html"> <span class="sr-only"></span></a>
+			</li>
+			<li class="nav-item" onmouseover="menu_over(this);"onmouseout="menu_out(this);">
+			<a class="nav-link" href="myprofile.html">프로필 <span class="sr-only"></span></a>
+			</li>
+			<li class="nav-item" onmouseover="menu_over(this);" onmouseout="menu_out(this);">
+			<a class="nav-link" href="GG.html">10주년</a>
+			</li>
+			<li class="nav-item" onmouseover="menu_over(this);" onmouseout="menu_out(this);">
+			<a class="nav-link " href="star.html">마지막</a>
+			</li>
+		</ul>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signinModal">sign in</button>
+	</div>
+	<div></div>
+</nav>
+<body>
+	<div class="container">
+		<h1>태근 블로그</h1>
+	</div>
+
+
+	<!-- 로그인 결과창 -->
+	<div class="modal" id="myModal"  onclick="goTo()">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">로그인 결과</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" id="signModal" onclick="goTo()">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">회원가입 결과</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 로그인 폼 -->
+
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form class="form my-2 my-lg-0" id="loginForm">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Login Page</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input class="form-control mr-sm-2" type="text" placeholder="ID" aria-label="ID" id="id" required><br> 
+						<input class="form-control mr-sm-2" type="password" placeholder="PWD" aria-label="PWD" id="pwd" required><br>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+	<!-- 로그인 모달 -->
+	<script>
+	function goTo() {
+		location.href = './myblog.html';
+	}
+		$(document).ready(
+				function() {
+					$('#loginForm').submit(
+							function(event) {
+								event.preventDefault();
+								var id = $('#id').val();
+								var pwd = $('#pwd').val();
+
+								$.post("http://httpbin.org/post", {
+									id : id,
+									pwd : pwd
+								}, function(data) {
+									$('#loginModal').modal('hide')
+									var myModal = $('#myModal');
+									myModal.modal();
+									myModal.find('.modal-body').text(
+											data.form.id + '님 로그인 되었습니다.');
+								});
+							});
+					$('#signinForm').submit(
+							function(event) {
+								event.preventDefault();
+								var num = $('#num').val();
+								var name = $('#name').val();
+
+								$.post("http://httpbin.org/post", {
+									num : num,
+									name : name
+								}, function(data) {
+									$('#signinModal').modal('hide')
+									var myModal = $('#signModal');
+									myModal.modal();
+									myModal.find('.modal-body').text(
+											data.form.name + '님 회원가입 되었습니다.');
+								});
+							});
+				});
+		
+	</script>
+
+	<!-- 회원가입 폼 -->
+	<div class="modal fade" id="signinModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form class="form my-2 my-lg-0" id="signinForm">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">sign in Page</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<select name="list" required>
+						<option value="">-선택-</option>
+						<option value="1">1반</option>
+						<option value="2">2반</option>
+						<option value="3">3반</option>
+						<option value="4">4반</option>
+						<option value="5">5반</option>
+						<option value="6">6반</option>
+						</select>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">1학년</a> 
+							<a class="dropdown-item" href="#">2학년</a> 
+							<a class="dropdown-item" href="#">3학년</a>
+						</div>
+						<input class="form-control mr-sm-2" type="radio" name="grade" value="1" aria-label="ID" id="grade" checked>1학년 
+						<input class="form-control mr-sm-2" type="radio" name="grade" value="2" aria-label="ID" id="grade">2학년 
+						<input class="form-control mr-sm-2" type="radio" name="grade" value="3" aria-label="ID" id="grade">3학년<br> 
+						<input class="form-control mr-sm-2" type="text" id="num" name="num" placeHolder="번호" required><br>
+						<input class="form-control mr-sm-2" type="text" id="name" name="name" placeHolder="이름" required><br>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">회원가입</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+</body>
+
+</html>
